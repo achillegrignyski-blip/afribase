@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: afribase-db
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: afribase_password_2026
+    ports:
+      - "5432:5432"
+
+  rest:
+    image: postgrest/postgrest:v12.0.2
+    container_name: afribase-rest
+    ports:
+      - "3000:3000"
+    environment:
+      PGRST_DB_URI: postgresql://postgres:afribase_password_2026@db:5432/postgres
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: anon
+    depends_on:
+      - db
