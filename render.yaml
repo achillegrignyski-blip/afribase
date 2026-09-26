@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: afribase-rest
-    env: docker
-    plan: free
-    dockerfilePath: ./Dockerfile
-    envVars:
-      - key: PORT
-        value: 3000
